@@ -70,12 +70,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.free_resource:
                 Toast.makeText(this, "Touched free resource", Toast.LENGTH_LONG).show();
                 Intent freeResourceIntent = new Intent(getApplicationContext(), FreeResourceActivity.class);
-
                 freeResourceIntent.putExtra("key", 1);
                 startActivity(freeResourceIntent);
                 return true;
             case R.id.event_news:
                 Toast.makeText(this, "Touched event news", Toast.LENGTH_LONG).show();
+                Intent eventIntent = new Intent(getApplicationContext(), EventNewsActivity.class);
+                eventIntent.putExtra("key", 1);
+                startActivity(eventIntent);
                 return true;
             case R.id.me:
                 Toast.makeText(this, "Touched profile", Toast.LENGTH_LONG).show();
@@ -88,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
 
     }

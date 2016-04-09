@@ -66,7 +66,6 @@ public class OfficeHourActivity extends AppCompatActivity {
 
 
                 Toast.makeText(getApplicationContext(),names[position],Toast.LENGTH_LONG).show();
-
             }
         });
 
