@@ -53,7 +53,6 @@ public class OfficeHourActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getApplicationContext(),names[position],Toast.LENGTH_LONG).show();
-
             }
         });
 
