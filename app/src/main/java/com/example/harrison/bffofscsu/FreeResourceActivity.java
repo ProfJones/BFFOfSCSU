@@ -5,10 +5,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class FreeResourceActivity extends AppCompatActivity {
 
@@ -21,10 +27,22 @@ public class FreeResourceActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String[] freeResources = new String[]{"Free Parking", "Free Skating", "Free Coffee"};
+        List<Map<String,String>> data  = new ArrayList<Map<String,String>>();
+        for (String resource :freeResources){
+            Map<String, String> newEntry = new HashMap<>();
+            newEntry.put("title", resource);
+            newEntry.put("sub-title", "Learn more about "+resource + "!");
+            data.add(newEntry);
+        }
 
-        String[] myStringArray = {"Free Parking", "Free Open Skate", "Free ponies", "Free dom!"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, myStringArray);
+        SimpleAdapter adapter = new SimpleAdapter(this, data,
+                android.R.layout.simple_list_item_2,
+                new String[] {"title","sub-title"},
+                new int[]{ android.R.id.text1,
+                           android.R.id.text2});
+
+
 
         setContentView(R.layout.free_resource_layout);
         ListView listView = (ListView) findViewById(R.id.list_view);
