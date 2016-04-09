@@ -76,6 +76,14 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.event_news:
                 Toast.makeText(this, "Touched event news", Toast.LENGTH_LONG).show();
+
+
+
+                Toast.makeText(this, "Touched free resource", Toast.LENGTH_LONG).show();
+                Intent eventIntent = new Intent(getApplicationContext(), EventNewsActivity.class);
+
+                eventIntent.putExtra("key", 1);
+                startActivity(eventIntent);
                 return true;
             case R.id.me:
                 Toast.makeText(this, "Touched profile", Toast.LENGTH_LONG).show();

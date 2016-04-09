@@ -3,6 +3,7 @@ package com.example.harrison.bffofscsu;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -54,6 +55,11 @@ public class FreeResourceActivity extends AppCompatActivity {
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+    //@Override
+    public void onListItemClick(ListView listView, View view, int position, long id)
+    {
+
+    }
     @Override
     public void onStart() {
         super.onStart();

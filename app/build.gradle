@@ -24,4 +24,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.3.0'
     compile 'com.android.support:design:23.3.0'
+    //TODO: We need to figure out either A) What app indexing is and use it or B) figure out how to remove it from the project
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
