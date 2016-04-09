@@ -24,11 +24,12 @@
             android:layout_gravity="center"
             android:textColor="#006400"
             android:textStyle="bold" />
-    </LinearLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_view_office_hour" />
+
+    </LinearLayout>
 
 </RelativeLayout>
