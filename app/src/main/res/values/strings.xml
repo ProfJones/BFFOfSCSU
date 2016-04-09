@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">BFFofSCSU</string>
+    <string name="office_hour">OfficeHour</string>
+    <string name="free_resource">FreeResource</string>
+    <string name="event_news">EventNews</string>
+    <string name="me">Me</string>
     <string name="action_settings">Settings</string>
 </resources>
