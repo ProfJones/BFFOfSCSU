@@ -18,6 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".OfficeHourActivity" />
+        <activity android:name=".FreeResourceActivity" />
+        <activity android:name=".EventNewsActivity" />
+        <activity android:name=".MeActivity"></activity>
     </application>
 
 </manifest>
