@@ -1,30 +1,44 @@
 package com.example.harrison.bffofscsu;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.example.harrison.bffofscsu.com.components.freeresoureactivity.ChildRow;
+import com.example.harrison.bffofscsu.com.components.freeresoureactivity.MyExpandableListAdapter;
+import com.example.harrison.bffofscsu.com.components.freeresoureactivity.ParentRow;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity
+        implements SearchView.OnQueryTextListener,SearchView.OnCloseListener{
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private SearchManager searchManager;
+    private android.widget.SearchView searchView;
+    private MyExpandableListAdapter listAdapter;
+    private ExpandableListView myList;
+    private ArrayList<ParentRow> parentList = new ArrayList<ParentRow>();
+//    private ArrayList<ParentRow> showTheseParentList = new ArrayList<ParentRow>();
+    private MenuItem searchItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,22 +48,78 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        searchManager = (SearchManager)getSystemService(Context.SEARCH_SERVICE);
+        parentList = new ArrayList<ParentRow>();
+//        showTheseParentList = new ArrayList<ParentRow>();
+
+        //the app will crash if display list is not called here
+        displayList();
+        //this expands the list of continents
+        expandAll();
+    }
+
+    private void loadData(){
+        ArrayList<ChildRow> childRows = new ArrayList<ChildRow>();
+        ParentRow parentRow = null;
+
+        childRows.add(new ChildRow(R.drawable.search,"something, here may be about exit"));
+        childRows.add(new ChildRow(R.drawable.search,"something, here may be sit"));
+        parentRow = new ParentRow("First Group",childRows);
+        parentList.add(parentRow);
+
+        childRows = new ArrayList<ChildRow>();
+        childRows.add(new ChildRow(R.drawable.search,"Fido is the name of his dog"));
+        childRows.add(new ChildRow(R.drawable.search,"Add two plus two."));
+        parentRow = new ParentRow("Second Group",childRows);
+        parentList.add(parentRow);
+    }
+
+    private void expandAll(){
+        int count = listAdapter.getGroupCount();
+        for (int i=0;i<count;i++){
+            myList.expandGroup(i);
+        }
+    }
+    private void displayList(){
+        loadData();
+        myList = (ExpandableListView)findViewById(R.id.expandableListView_search);
+        listAdapter = new MyExpandableListAdapter(MainActivity.this,parentList);
+
+        myList.setAdapter(listAdapter);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+        });
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(this);
+        searchView.setOnCloseListener(this);
+        searchView.requestFocus();
         return true;
     }
 
@@ -132,5 +202,26 @@ public class MainActivity extends AppCompatActivity {
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
+    }
+
+    @Override
+    public boolean onClose() {
+        listAdapter.filterData("");
+        expandAll();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        listAdapter.filterData(query);
+        expandAll();
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        listAdapter.filterData(newText);
+        expandAll();
+        return false;
     }
 }
