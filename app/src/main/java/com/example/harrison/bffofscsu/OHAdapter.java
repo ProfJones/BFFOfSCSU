@@ -20,7 +20,7 @@ public class OHAdapter extends ArrayAdapter<String> {
     Context ctx;
     LayoutInflater inflater;
 
-    public OHAdapter(Context context, String[] names, String[] departments, int[] imgs) {
+        public OHAdapter(Context context, String[] names, String[] departments, int[] imgs) {
         super(context, R.layout.professor_item_layout,names);
 
         this.ctx = context;
