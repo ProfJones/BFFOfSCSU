@@ -151,6 +151,9 @@ public class MainActivity extends AppCompatActivity
                 return true;
             case R.id.me:
                 Toast.makeText(this, "Touched profile", Toast.LENGTH_LONG).show();
+                Intent meIntent = new Intent(getApplicationContext(), MeActivity.class);
+                meIntent.putExtra("key", 1);
+                startActivity(meIntent);
                 return true;
             case R.id.search:
                 Toast.makeText(this, "Touched search", Toast.LENGTH_LONG).show();

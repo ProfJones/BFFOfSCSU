@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # BFFOfSCSU
 
    Overview about this project:
@@ -46,4 +47,3 @@ service. Our goal is to build an app which really satisfy our students by provid
 	
 	Invitation:
 	This is a real good idea, and this project needs some developers to join us. We invite you, 
-who really want to do some meaningful thing, some significative thing.

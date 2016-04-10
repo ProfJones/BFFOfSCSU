@@ -24,7 +24,7 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
-        <!--<activity android:name=".MeActivity" />-->
+        <activity android:name=".MeActivity" />
         <activity android:name=".OfficeHourActivity" />
         <activity android:name=".FreeResourceActivity" />
         <activity android:name=".EventNewsActivity" />
